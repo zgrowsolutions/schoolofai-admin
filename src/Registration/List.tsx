@@ -7,14 +7,13 @@ import {
   Spacer,
   Select,
   createListCollection,
-  Spinner,
-  Box,
-  Text,
-  Input,
 } from "@chakra-ui/react";
 import { DateFormat } from "@/components/shared/DateFormat";
 import { CompactPagination } from "@/components/shared/Pagination";
 import { parseAsInteger, parseAsString, useQueryState } from "nuqs";
+import { SearchBar } from "@/components/shared/SearchBar";
+import { DownloadExcelButton } from "@/components/shared/DownloadButton";
+import { FullPageLoader } from "@/components/shared/FullPageLoader";
 
 interface Registration {
   id: number;
@@ -128,19 +127,28 @@ const List = () => {
 
   return (
     <>
-      <Table.ScrollArea height={"calc(100vh - 140px)"}>
-        <HStack p={4}>
+      <Table.ScrollArea height={"calc(100vh - 72px)"}>
+        <HStack px={4} py={2}>
           <Heading>Registrations</Heading>
-          <Input
-            defaultValue={search}
-            onChange={(e) => {
-              setPage(1);
-              setSearch(e.target.value);
+          <Spacer />
+          <CompactPagination
+            pageSize={PAGE_SIZE}
+            count={registrations?.pagination.total || 0}
+            page={page}
+            onPageChange={(p) => {
+              setPage(p.page);
             }}
-            placeholder="Search"
-            w={300}
-            type="search"
           />
+        </HStack>
+        <HStack px={4} py={2}>
+          <SearchBar
+            search={search}
+            onSearch={(txt) => {
+              setPage(1);
+              setSearch(txt);
+            }}
+          />
+          <Spacer />
           <Select.Root
             collection={courses || EpmptyList}
             w={200}
@@ -217,19 +225,13 @@ const List = () => {
             </Select.Positioner>
           </Select.Root>
 
-          <Spacer />
-          <CompactPagination
-            pageSize={PAGE_SIZE}
-            count={registrations?.pagination.total || 0}
-            page={page}
-            onPageChange={(p) => {
-              setPage(p.page);
-            }}
+          <DownloadExcelButton
+            downloadUrl={`/admin/registration/download?course=${course}&campaign=${campaign}`}
           />
         </HStack>
 
         {isLoading ? (
-          <Loading />
+          <FullPageLoader height="70vh" />
         ) : (
           <Table.Root size={"lg"} stickyHeader>
             <Table.Header>
@@ -266,18 +268,3 @@ const List = () => {
 };
 
 export default List;
-
-const Loading = () => {
-  return (
-    <Box
-      h={"70%"}
-      display={"grid"}
-      gap={2}
-      placeContent={"center"}
-      placeItems={"center"}
-    >
-      <Spinner />
-      <Text>Loading ...</Text>
-    </Box>
-  );
-};

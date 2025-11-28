@@ -1,12 +1,17 @@
-import React, { useState, useEffect, useEffectEvent } from "react";
+import React, {
+  useState,
+  useEffect,
+  useEffectEvent,
+  lazy,
+  Suspense,
+} from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-
 import Auth from "@/auth";
-import Console from "@/console";
 import { useUser } from "@/store/use-user";
 import { apiClient } from "@/lib/api-client";
+import { FullPageLoader } from "@/components/shared/FullPageLoader";
 
-import { Spinner, Box, Text, Center } from "@chakra-ui/react";
+const Console = lazy(() => import("@/console"));
 
 const Protected = ({ children }: { children: React.ReactNode }) => {
   const { user, setToken, setUser, token } = useUser();
@@ -30,14 +35,7 @@ const Protected = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   if (loading) {
-    return (
-      <Box display="grid" placeItems="center" height="100vh">
-        <Center flexDirection="column">
-          <Spinner />
-          <Text mt={4}>Loading...</Text>
-        </Center>
-      </Box>
-    );
+    return <FullPageLoader />;
   }
 
   if ((!token || !user) && !loading) {
@@ -56,7 +54,9 @@ const Router = () => {
           path="/console/*"
           element={
             <Protected>
-              <Console />
+              <Suspense fallback={<FullPageLoader />}>
+                <Console />
+              </Suspense>
             </Protected>
           }
         />

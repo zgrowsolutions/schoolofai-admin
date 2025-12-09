@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Users from "@/Users";
+import Users from "@/Users/index";
 import Dashboard from "@/Dashboard";
 import Registration from "@/Registration";
 

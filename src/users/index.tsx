@@ -4,7 +4,6 @@ import {
   Button,
   Spacer,
   Dialog,
-  Portal,
   CloseButton,
 } from "@chakra-ui/react";
 import { FiPlus } from "react-icons/fi";
@@ -31,23 +30,21 @@ const Users = () => {
         open={open}
         onOpenChange={(e) => setOpen(e.open)}
       >
-        <Portal>
-          <Dialog.Backdrop />
-          <Dialog.Positioner>
-            <Dialog.Content>
-              <Dialog.Header>
-                <Dialog.Title>New user</Dialog.Title>
-              </Dialog.Header>
-              <Dialog.Body>
-                <CreateForm />
-              </Dialog.Body>
+        <Dialog.Backdrop />
+        <Dialog.Positioner>
+          <Dialog.Content>
+            <Dialog.Header>
+              <Dialog.Title>New user</Dialog.Title>
+            </Dialog.Header>
+            <Dialog.Body>
+              <CreateForm />
+            </Dialog.Body>
 
-              <Dialog.CloseTrigger asChild>
-                <CloseButton size="sm" />
-              </Dialog.CloseTrigger>
-            </Dialog.Content>
-          </Dialog.Positioner>
-        </Portal>
+            <Dialog.CloseTrigger asChild>
+              <CloseButton size="sm" />
+            </Dialog.CloseTrigger>
+          </Dialog.Content>
+        </Dialog.Positioner>
       </Dialog.Root>
     </>
   );

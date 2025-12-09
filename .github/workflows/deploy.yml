@@ -61,7 +61,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            APP_DIR=/var/www/schoolofai-v2/admin
+            APP_DIR=/var/www/schoolofai/admin
             sudo rm -rf $APP_DIR
             sudo mkdir -p $APP_DIR
             sudo tar -xzf /tmp/dist.tar.gz -C $APP_DIR --strip-components=1

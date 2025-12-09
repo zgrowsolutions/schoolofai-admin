@@ -1,18 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "@/lib/api-client";
-import {
-  IconButton,
-  Table,
-  Dialog,
-  Portal,
-  CloseButton,
-} from "@chakra-ui/react";
+import { IconButton, Table, Dialog, CloseButton } from "@chakra-ui/react";
 import { DateFormat } from "@/components/shared/DateFormat";
-import Delete from "./Delete";
 import { FiEdit2 } from "react-icons/fi";
 import { useState } from "react";
-import EditForm from "./EditForm";
 import { Tooltip } from "@/components/ui/tooltip";
+import Delete from "./Delete";
+import EditForm from "./EditForm";
 
 export interface User {
   id: string;
@@ -83,23 +77,21 @@ const List = () => {
         open={Boolean(open)}
         onOpenChange={(e) => setOpen(Boolean(e.open))}
       >
-        <Portal>
-          <Dialog.Backdrop />
-          <Dialog.Positioner>
-            <Dialog.Content>
-              <Dialog.Header>
-                <Dialog.Title>Edit user</Dialog.Title>
-              </Dialog.Header>
-              <Dialog.Body>
-                {typeof open !== "boolean" && <EditForm data={open} />}
-              </Dialog.Body>
+        <Dialog.Backdrop />
+        <Dialog.Positioner>
+          <Dialog.Content>
+            <Dialog.Header>
+              <Dialog.Title>Edit user</Dialog.Title>
+            </Dialog.Header>
+            <Dialog.Body>
+              {typeof open !== "boolean" && <EditForm data={open} />}
+            </Dialog.Body>
 
-              <Dialog.CloseTrigger asChild>
-                <CloseButton size="sm" />
-              </Dialog.CloseTrigger>
-            </Dialog.Content>
-          </Dialog.Positioner>
-        </Portal>
+            <Dialog.CloseTrigger asChild>
+              <CloseButton size="sm" />
+            </Dialog.CloseTrigger>
+          </Dialog.Content>
+        </Dialog.Positioner>
       </Dialog.Root>
     </>
   );

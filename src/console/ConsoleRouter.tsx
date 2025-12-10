@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Users from "@/user";
-import Dashboard from "@/dashboard";
-import Registration from "@/registration";
+import Dashboard from "@/dash1";
+import Registration from "@/reg1";
 
 const ConsoleRouter = () => {
   return (

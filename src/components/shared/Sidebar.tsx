@@ -1,11 +1,33 @@
-import { FiUsers, FiFolder, FiPieChart } from "react-icons/fi";
+import {
+  FiUsers,
+  FiFolder,
+  FiPieChart,
+  FiBookmark,
+  FiYoutube,
+} from "react-icons/fi";
+import { PiCurrencyInr } from "react-icons/pi";
 import { VStack, HStack } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 
 const menu = [
   { label: "Dashboard", path: "/console/dashboard", icon: FiPieChart },
   { label: "Registration", path: "/console/registration", icon: FiFolder },
-  { label: "Users", path: "/console/users", icon: FiUsers },
+  { label: "AI365 Users", path: "/console/ai365-users", icon: FiUsers },
+  {
+    label: "AI365 Subscription",
+    path: "/console/ai365-subscription",
+    icon: FiBookmark,
+  },
+  {
+    label: "AI365 Payments",
+    path: "/console/ai365-payments",
+    icon: PiCurrencyInr,
+  },
+  {
+    label: "AI365 Videos",
+    path: "/console/ai365-videos",
+    icon: FiYoutube,
+  },
 ];
 const Sidebar = () => {
   return (

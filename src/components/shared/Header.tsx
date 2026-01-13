@@ -10,6 +10,7 @@ import {
 import { FiLogOut } from "react-icons/fi";
 import { LuBrainCircuit } from "react-icons/lu";
 import { Tooltip } from "@/components/ui/tooltip";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const { user, logout } = useUser();
@@ -23,6 +24,7 @@ const Header = () => {
       </HStack>
       <Spacer />
       <HStack gap={4}>
+        <Link to="/console/users">Users</Link>
         <VStack alignItems={"start"} gap={0}>
           <Tooltip content={user?.email}>
             <Text fontWeight={"semibold"} fontSize={"sm"}>
